@@ -97,5 +97,9 @@ router.delete('/:projectId', async (req,res)=>{
     }
 });
 
+router.teste('/teste', async (req,res)=>{
+    return res.send("ok");
+});
+
 
 module.exports = app => app.use('/projects',router);
