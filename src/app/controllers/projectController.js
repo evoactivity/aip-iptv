@@ -97,8 +97,8 @@ router.delete('/:projectId', async (req,res)=>{
     }
 });
 
-router.post('/', async (req,res)=>{
-    return res.send("OK");
+router.post('/teste', async (req,res)=>{
+    return res.send("SERVER ONLINE");
 });
 
 
