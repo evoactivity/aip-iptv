@@ -3,14 +3,14 @@ const router = express.Router();
 const authMiddleware = require('../middlewares/auth');
 
 const Project = require('../models/project');
-const Task = require('../models/task');
+const Device = require('../models/device');
 
 router.use(authMiddleware);
 
 router.get('/',async (req,res)=>{
     try{
 
-        const projects = await Project.find().populate(['tasks','user']);
+        const projects = await Project.find().populate(['devices','user']);
         return res.send({projects})
 
     }catch(err){
@@ -22,7 +22,7 @@ router.get('/',async (req,res)=>{
 router.get('/:projectId', async (req,res) =>{
     try{
 
-        const project = await Project.findById(req.params.projectId).populate('user');
+        const project = await Project.findById(req.params.projectId).populate('user','devices');
         return res.send({project})
 
     }catch(err){
@@ -34,16 +34,25 @@ router.get('/:projectId', async (req,res) =>{
 router.post('/', async (req,res)=>{
     try{
 
-        const {title, description, tasks} = req.body;
-        
-        const project = await Project.create({title,description, user: req.userId});
-       
-        await Promise.all(tasks.map(async task =>{
-            const projectTask = new Task({...task,project:project._id});
-         
-            await projectTask.save();
+        const { devices, teste} = req.body;
 
-            project.tasks.push(projectTask);
+
+        console.log(req.userId, teste);
+
+        if(req.userId === null){
+            console.log("É NULL");
+            return res.status(400).send({error: 'Invalid User Id'});
+        }
+
+        
+        const project = await Project.create({ user: req.userId});
+       
+        await Promise.all(devices.map(async device =>{
+            const projectDevice = new Device({...device,project:project._id});
+         
+            await projectDevice.save();
+
+            project.devices.push(projectDevice);
         }));
 
         await project.save();
@@ -57,23 +66,20 @@ router.post('/', async (req,res)=>{
 
 router.put('/:projectId', async (req,res)=>{
     try{
-        const {title, description, tasks} = req.body;
+        const {devices} = req.body;
         
-        const project = await Project.findByIdAndUpdate(req.params.projectId, {
-            title,
-            description
-        },{new:true});
+        const project = await Project.findByIdAndUpdate(req.params.projectId, {},{new:true});
 
-        project.tasks = [];
+        project.devices = [];
 
-        await Task.remove({project: project._id});
+        await Device.remove({project: project._id});
        
-        await Promise.all(tasks.map(async task =>{
-            const projectTask = new Task({...task,project:project._id});
+        await Promise.all(devices.map(async device =>{
+            const projectDevice = new Device({...device,project:project._id});
          
-            await projectTask.save();
+            await projectDevice.save();
 
-            project.tasks.push(projectTask);
+            project.devices.push(projectDevice);
         }));
 
         await project.save();
@@ -81,6 +87,7 @@ router.put('/:projectId', async (req,res)=>{
         return res.send({project});
 
     }catch(err){
+        console.log(err);
         return res.status(400).send({error: 'Error updating new project'});
     }
 });

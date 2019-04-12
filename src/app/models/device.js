@@ -1,7 +1,7 @@
 const mongoose = require('../../database');
 const bcrypt = require('bcryptjs');
 
-const TaskSchema = new mongoose.Schema({
+const DeviceSchema = new mongoose.Schema({
     title:{
         type: String,
         require: true,
@@ -11,9 +11,12 @@ const TaskSchema = new mongoose.Schema({
         ref:'Project',
         require: true,
     },
-    assignedTo:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+    cloudId:{
+        type: String,
+        require: true,
+    },
+    devicePassword:{
+        type: String,
         require: true,
     },
     completed:{
@@ -27,5 +30,5 @@ const TaskSchema = new mongoose.Schema({
     },
 });
 
-const Task = mongoose.model('Task', TaskSchema);
-module.exports = Task;
+const Device = mongoose.model('Device', DeviceSchema);
+module.exports = Device;
