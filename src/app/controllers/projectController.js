@@ -15,36 +15,36 @@ router.get('/',async (req,res)=>{
 
     }catch(err){
         return res.status(400).send({error: '_Error loading projects_'});
-
     }
 });
 
 router.get('/:projectId', async (req,res) =>{
     try{
 
-        const project = await Project.findById(req.params.projectId).populate('user','devices');
+        const {userId} = req.body;
+
+        if(req.userId.toString() != userId.toString()){
+            return res.status(400).send({error: 'Invalid User ID '});
+        }
+        
+        const project = await Project.findById(req.params.projectId).populate(['devices','user']);
+
         return res.send({project})
 
     }catch(err){
         return res.status(400).send({error: '_Error loading project_'});
-
     }
 });
 
 router.post('/', async (req,res)=>{
     try{
 
-        const { devices, teste} = req.body;
+        const {devices,userId} = req.body;
 
-
-        console.log(req.userId, teste);
-
-        if(req.userId === null){
-            console.log("É NULL");
-            return res.status(400).send({error: 'Invalid User Id'});
+        if(req.userId.toString() != userId.toString()){
+            return res.status(400).send({error: 'Invalid User ID '});
         }
 
-        
         const project = await Project.create({ user: req.userId});
        
         await Promise.all(devices.map(async device =>{
@@ -66,8 +66,12 @@ router.post('/', async (req,res)=>{
 
 router.put('/:projectId', async (req,res)=>{
     try{
-        const {devices} = req.body;
+        const {devices, userId} = req.body;
         
+        if(req.userId.toString() != userId.toString()){
+            return res.status(400).send({error: 'Invalid User Id'});
+        }
+
         const project = await Project.findByIdAndUpdate(req.params.projectId, {},{new:true});
 
         project.devices = [];
@@ -87,13 +91,18 @@ router.put('/:projectId', async (req,res)=>{
         return res.send({project});
 
     }catch(err){
-        console.log(err);
         return res.status(400).send({error: 'Error updating new project'});
     }
 });
 
 router.delete('/:projectId', async (req,res)=>{
+    const {userId} = req.body;
+   
     try{
+
+        if(req.userId.toString() != userId.toString()){
+            return res.status(400).send({error: 'Invalid User Id'});
+        }
 
         const project = await Project.findByIdAndRemove(req.params.projectId);
         return res.send();
