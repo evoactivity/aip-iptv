@@ -29,6 +29,7 @@ router.get('/:projectId', async (req,res) =>{
         
         const project = await Project.findById(req.params.projectId).populate(['devices','user']);
 
+        console.log(project);
         return res.send({project})
 
     }catch(err){
@@ -67,6 +68,9 @@ router.post('/', async (req,res)=>{
 router.put('/:projectId', async (req,res)=>{
     try{
         const {devices, userId} = req.body;
+
+        console.log("MIDDLE ID ->",req.userId.toString());
+        console.log(userId.toString());
         
         if(req.userId.toString() != userId.toString()){
             return res.status(400).send({error: 'Invalid User Id'});
@@ -91,6 +95,7 @@ router.put('/:projectId', async (req,res)=>{
         return res.send({project});
 
     }catch(err){
+        console.log(err);
         return res.status(400).send({error: 'Error updating new project'});
     }
 });
@@ -114,7 +119,7 @@ router.delete('/:projectId', async (req,res)=>{
 });
 
 router.post('/teste', async (req,res)=>{
-    return res.send("SERVER IS ONLINE NOW");
+    return res.send("SERVER IS ONLINE");
 });
 
 

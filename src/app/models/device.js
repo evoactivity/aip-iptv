@@ -19,7 +19,7 @@ const DeviceSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    completed:{
+    status:{
         type: Boolean,
         require: true,
         default: false,
