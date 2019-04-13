@@ -20,16 +20,12 @@ router.post('/register',async (req,res)=>{
 
     try{
         if( await User.findOne({email})){
-            return res.status(400).send({error: 'User already exists'});
+            return res.status(400).send({error: 'Esse usuário já foi utilizado'});
         }
-        else
-        {
-            const user = User.create(req.body);
-            return res.send({
-                user,
-                token:generateToken({id: user.id}),
-            });
-        }
+     
+        const user = User.create(req.body);
+        return res.send("Usuário registrado com sucesso");
+        
     }catch(err){
         return res.status(400).send({error: 'Registration failed'})
     }

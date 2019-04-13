@@ -19,11 +19,6 @@ const DeviceSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    status:{
-        type: Boolean,
-        require: true,
-        default: false,
-    },
     createdAt:{
         type: Date,
         default:Date.now,
