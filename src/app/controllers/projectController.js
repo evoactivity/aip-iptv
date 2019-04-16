@@ -21,11 +21,11 @@ router.get('/',async (req,res)=>{
 router.get('/:userId', async (req,res) =>{
     try{
 
-        /*if(req.userId.toString() != req.params.userId.toString()){
+        if(req.userId.toString() != req.params.userId.toString()){
             return res.status(400).send({error: 'Invalid User ID '});
-        }*/
+        }
     
-        const project = await Project.findOne({user:req.params.userId}).populate(['devices','user']);
+        const project = await Project.findOne({user: req.params.userId}).populate(['devices','user']);
         return res.send({project})
 
     }catch(err){
