@@ -18,12 +18,10 @@ router.get('/',async (req,res)=>{
     }
 });
 
-router.get('/:projectId', async (req,res) =>{
+router.get('/:projectId/:userId', async (req,res) =>{
     try{
 
-        const {userId} = req.body;
-
-        if(req.userId.toString() != userId.toString()){
+        if(req.userId.toString() != req.params.projectId.toString()){
             return res.status(400).send({error: 'Invalid User ID '});
         }
         
