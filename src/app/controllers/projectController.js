@@ -25,7 +25,7 @@ router.get('/:userId', async (req,res) =>{
             return res.status(400).send({error: 'Invalid User ID '});
         }*/
     
-        const project = await Project.find({user:req.params.userId}).populate(['devices','user']);
+        const project = await Project.findOne({user:req.params.userId}).populate(['devices','user']);
         return res.send({project})
 
     }catch(err){
