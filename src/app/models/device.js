@@ -23,6 +23,22 @@ const DeviceSchema = new mongoose.Schema({
         type: Date,
         default:Date.now,
     },
+    name_automation1:{
+        type: String,
+        require: true,
+    },
+    name_automation2:{
+        type: String,
+        require: true,
+    },
+    time_automation1:{
+        type: String,
+        require: true,
+    },
+    time_automation2:{
+        type: String,
+        require: true,
+    },
 });
 
 const Device = mongoose.model('Device', DeviceSchema);
