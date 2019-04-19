@@ -93,7 +93,7 @@ router.put('/:projectId/:userId', async (req,res)=>{
     }
 });
 
-router.delete('/:projectId/:userId', async (req,res)=>{
+router.delete('/:deviceId/:userId', async (req,res)=>{
   
     try{
 
@@ -101,20 +101,14 @@ router.delete('/:projectId/:userId', async (req,res)=>{
             return res.status(400).send({error: 'Invalid User Id'});
         }
 
-        const project = await Project.findByIdAndRemove(req.params.projectId);
-        return res.send();
+        const project = await Device.findByIdAndRemove(req.params.deviceId);
+ 
+        return res.send(project);
 
     }catch(err){
         return res.status(400).send({error: '_Error deleting project_'});
 
     }
 });
-
-router.post('/teste', async (req,res)=>{
-    return res.send("SERVER IS ONLINE");
-});
-
-
-
 
 module.exports = app => app.use('/projects',router);
