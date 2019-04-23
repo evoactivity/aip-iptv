@@ -111,21 +111,21 @@ router.delete('/:deviceId/:userId', async (req,res)=>{
     }
 });
 
-router.delete('/:deviceId', async (req,res)=>{
-  
+router.delete('/device/:deviceId/:projectId/:userId', async (req,res)=>{
+
     try{
 
         if(req.userId.toString() != req.params.userId.toString()){
             return res.status(400).send({error: 'Invalid User Id'});
         }
 
-        const project = await Project.devices.findByIdAndRemove(req.params.deviceId);
- 
+        const project = await Project.findByIdAndUpdate(
+            req.params.projectId,
+            {$pull: { devices: { $in: req.params.deviceId }}});
         return res.send(project);
 
     }catch(err){
-        return res.status(400).send({error: '_Error deleting project_'});
-
+        return res.status(400).send({error: '_Error deleting device_from project'});
     }
 });
 
