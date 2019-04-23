@@ -33,16 +33,16 @@ router.get('/:userId', async (req,res) =>{
     }
 });
 
-router.post('/', async (req,res)=>{
+router.post('/:userId', async (req,res)=>{
     try{
 
-        const {devices,userId} = req.body;
+        const {devices} = req.body;
 
-        if(req.userId.toString() != userId.toString()){
+        if(req.userId.toString() != req.params.userId.toString()){
             return res.status(400).send({error: 'Invalid User ID '});
         }
 
-        const project = await Project.create({ user: req.userId});
+        const project = await Project.create({ user: req.params.userId});
        
         await Promise.all(devices.map(async device =>{
             const projectDevice = new Device({...device,project:project._id});
