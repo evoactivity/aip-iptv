@@ -1,91 +1,84 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middlewares/auth');
-
-const Project = require('../models/project');
 const Device = require('../models/device');
 
 router.use(authMiddleware);
 
-router.get('/',async (req,res)=>{
+router.get('/',async (req,res)=>{ //Busca todos dispositivos
     try{
-
-        const projects = await Project.find().populate(['devices','user']);
-        return res.send({projects})
-
+        const devices = await Device.find();
+        return res.send({devices})
     }catch(err){
-        return res.status(400).send({error: '_Error loading projects_'});
+        return res.status(400).send({error: '_Error loading devices'});
     }
 });
 
-router.get('/:userId', async (req,res) =>{
+router.get('/:mac_address', async (req,res) =>{  //Busca dispositivo específico pelo Mac
     try{
 
-        if(req.userId.toString() != req.params.userId.toString()){
-            return res.status(400).send({error: 'Invalid User ID '});
-        }
+        await Device.findOne({"mac_address": req.params.mac_address}, function(err, results){
+            if(results){
+                return res.send(results);
+            }   
+            else
+            {
+                return res.status(400).send({error: '_Dispositivo não cadastrado_'});; 
+            }
+        });
     
-        const project = await Project.findOne({user: req.params.userId}).populate(['devices','user']);
-        return res.send({project})
-
     }catch(err){
-        return res.status(400).send({error: '_Error loading project_'});
+        return res.status(400).send({error: '_Error loading this device_'});
     }
 });
 
-router.post('/:userId', async (req,res)=>{
+router.post('/create_device', async (req,res)=>{    //Adiciona dispositivo
     try{
 
         const {devices} = req.body;
+        const mac = devices[0].mac_address;
 
-        if(req.userId.toString() != req.params.userId.toString()){
-            return res.status(400).send({error: 'Invalid User ID '});
-        }
+        await Device.findOne({"mac_address": mac}, function(err, results){
+            if(results!=null){
+                return res.status(400).send({error: 'Aparelho já cadastrado'});
+            }     
+        });
 
-        const project = await Project.create({ user: req.params.userId});
-       
-        await Promise.all(devices.map(async device =>{
-            const projectDevice = new Device({...device,project:project._id});
-         
-            await projectDevice.save();
-
-            project.devices.push(projectDevice);
-        }));
-
-        await project.save();
-        
-        return res.send({project});
+        await Device.create(devices, function(err, results){
+            if(results){
+                return res.send("Dispositivo registrado com sucesso");
+            }     
+            else
+            {
+                return res.status(400).send({error: 'Erro salvando disppositivo'});
+            }
+        });    
 
     }catch(err){
-        return res.status(400).send({error: 'Error creating new project'});
+        return res.status(400).send({error: 'Erro adicionando novo dispositivo'});
     }
 });
 
-router.put('/:projectId/:userId', async (req,res)=>{
+router.put('/:deviceId', async (req,res)=>{    //Atualizar dispositivo
     try{
         const {devices} = req.body;
 
-        if(req.userId.toString() != req.params.userId.toString()){
-            return res.status(400).send({error: 'Invalid User Id'});
-        }
-
-        const project = await Project.findByIdAndUpdate(req.params.projectId, {},{new:true});
-
-        project.devices = [];
-
-        await Device.remove({project: project._id});
-       
-        await Promise.all(devices.map(async device =>{
-            const projectDevice = new Device({...device,project:project._id});
-         
-            await projectDevice.save();
-
-            project.devices.push(projectDevice);
-        }));
-
-        await project.save();
-        
-        return res.send({project});
+        await Device.findById(req.params.deviceId, function (err, result) {      
+           
+            if(result!=null){
+                result.title = devices[0].title ;
+                result.mac_address = devices[0].mac_address;
+                result.devicePassword = devices[0].devicePassword;
+                result.url = devices[0].url;
+                result.obs = devices[0].obs;
+                result.save();
+                return res.send("Atualizado com sucesso");
+            }
+            else
+            {
+                return res.status(400).send({error: '_Dispositivo não cadastrado_'});; 
+            }
+        });
 
     }catch(err){
         console.log(err);
@@ -93,40 +86,17 @@ router.put('/:projectId/:userId', async (req,res)=>{
     }
 });
 
-router.delete('/:deviceId/:userId', async (req,res)=>{
-  
+router.delete('/:deviceId', async (req,res)=>{  //Deleta dispositivo
     try{
-
-        if(req.userId.toString() != req.params.userId.toString()){
-            return res.status(400).send({error: 'Invalid User Id'});
-        }
-
-        const project = await Device.findByIdAndRemove(req.params.deviceId);
- 
-        return res.send(project);
-
+        const device = await Device.findByIdAndRemove(req.params.deviceId);
+        return res.send("Dispositivo removido");
     }catch(err){
         return res.status(400).send({error: '_Error deleting project_'});
-
     }
 });
 
-router.delete('/device/:deviceId/:projectId/:userId', async (req,res)=>{
 
-    try{
+module.exports = app => app.use('/api',router);
 
-        if(req.userId.toString() != req.params.userId.toString()){
-            return res.status(400).send({error: 'Invalid User Id'});
-        }
 
-        const project = await Project.findByIdAndUpdate(
-            req.params.projectId,
-            {$pull: { devices: { $in: req.params.deviceId }}});
-        return res.send(project);
 
-    }catch(err){
-        return res.status(400).send({error: '_Error deleting device_from project'});
-    }
-});
-
-module.exports = app => app.use('/projects',router);

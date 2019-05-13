@@ -6,14 +6,11 @@ const DeviceSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    project:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Project',
-        require: true,
-    },
-    cloudId:{
+    mac_address:{
         type: String,
-        require: true,
+        unique: true,
+        required: true,
+        lowercase: true,
     },
     devicePassword:{
         type: String,
@@ -23,19 +20,12 @@ const DeviceSchema = new mongoose.Schema({
         type: Date,
         default:Date.now,
     },
-    name_automation1:{
+    url:{
         type: String,
         require: true,
+        lowercase: true,
     },
-    name_automation2:{
-        type: String,
-        require: true,
-    },
-    time_automation1:{
-        type: String,
-        require: true,
-    },
-    time_automation2:{
+    obs:{
         type: String,
         require: true,
     },
