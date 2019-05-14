@@ -50,14 +50,14 @@ router.post('/create_device', async (req,res)=>{    //Adiciona dispositivo
       
       
         if(await Device.findOne({"mac_address": mac})){
-            return res.status(404).send({error: 'Aparelho já cadastrado'});
+            return res.status(400).send({error: 'Aparelho já cadastrado'});
         }    
         
         await Device.create(devices);
         return res.send(true);
             
     }catch(err){
-        return res.status(404).send({error: 'Erro adicionando novo dispositivo'});
+        return res.status(400).send({error: 'Erro adicionando novo dispositivo'});
     }  
 }); 
 
