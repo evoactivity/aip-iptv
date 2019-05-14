@@ -44,14 +44,14 @@ router.post('/create_device', async (req,res)=>{    //Adiciona dispositivo
             }     
         });
 
-        await Device.create(devices, function(err, results){
+      /*  await Device.create(devices, function(err, results){
             if(err)
             {
                 return res.status(400).send({error: 'Erro salvando dispositivo'});
             }
-        });    
+        }); */   
 
-        return res.status(200).send("Dispositivo registrado com sucesso");
+        return res.send("Dispositivo registrado com sucesso");
 
     }catch(err){
         return res.status(400).send({error: 'Erro adicionando novo dispositivo'});
