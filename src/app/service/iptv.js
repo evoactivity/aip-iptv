@@ -12,12 +12,15 @@ function getIptv(url){
     }
 
     return new Promise((resolve, reject) => {
+        console.log("Url request ->" + Url);
         request(options, function (error, response, body) {
             
         if (!error && response.statusCode == 200) {   
-           resolve(body);
+            console.log("Resultado request ->" + body );
+            resolve(body);
         }
         else
+        console.log("Reject ->" + error );
             reject(error);
         });
     });
