@@ -32,6 +32,7 @@ router.post('/',async (req,res)=>{
             }
         });
         console.log("Vai entrar no service");
+        console.log(device);
         iptv.getIptv(device.url.trim()).then((result) => {
             console.log("Resultado appcontrolle ->" + result );
             return res.send(result);  
