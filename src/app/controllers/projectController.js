@@ -74,7 +74,7 @@ router.put('/:deviceId', async (req,res)=>{    //Atualizar dispositivo
                 result.url = devices[0].url;
                 result.obs = devices[0].obs;
                 result.save();
-                return res.send("Atualizado com sucesso");
+                return res.send();
             }
             else
             {
@@ -91,7 +91,7 @@ router.put('/:deviceId', async (req,res)=>{    //Atualizar dispositivo
 router.delete('/delete/:deviceId', async (req,res)=>{  //Deleta dispositivo
     try{
         const device = await Device.findByIdAndRemove(req.params.deviceId);
-        return res.send("Dispositivo removido");
+        return res.send();
     }catch(err){
         return res.status(400).send({error: '_Error deleting project_'});
     }
