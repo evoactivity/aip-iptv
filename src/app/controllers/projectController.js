@@ -5,6 +5,16 @@ const Device = require('../models/device');
 
 router.use(authMiddleware);
 
+router.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    next();
+});
+
 router.get('/',async (req,res)=>{ //Busca todos dispositivos
     try{
         const devices = await Device.find();
@@ -33,36 +43,23 @@ router.get('/:mac_address', async (req,res) =>{  //Busca dispositivo específico
 });
 
 router.post('/create_device', async (req,res)=>{    //Adiciona dispositivo
-   /* try{
+    try{
 
         const {devices} = req.body;
         const mac = devices[0].mac_address;
       
-        try{
-            if(await Device.findOne({"mac_address": mac})){
-                return res.status(400).send({error: 'Aparelho já cadastrado'});
-            }    
-           
-         
-            const user = User.create(req.body);
-            return res.send("Usuário registrado com sucesso");
-            
-        }catch(err){
-            return res.status(400).send({error: 'Registration failed'})
-        }
-
-        await Device.create(devices, function(err, results){
-            if(err)
-            {
-                return res.status(400).send({error: 'Erro salvando dispositivo'});
-            }
-        });    
-
+      
+        if(await Device.findOne({"mac_address": mac})){
+            return res.status(400).send({error: 'Aparelho já cadastrado'});
+        }    
+        
+        const device = Device.create(devices);
         return res.send("Dispositivo registrado com sucesso");
 
+            
     }catch(err){
         return res.status(400).send({error: 'Erro adicionando novo dispositivo'});
-    } */  
+    }  
 }); 
 
 router.put('/:deviceId', async (req,res)=>{    //Atualizar dispositivo
