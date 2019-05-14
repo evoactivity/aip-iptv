@@ -88,7 +88,7 @@ router.put('/:deviceId', async (req,res)=>{    //Atualizar dispositivo
     }
 });
 
-router.delete('/:deviceId', async (req,res)=>{  //Deleta dispositivo
+router.delete('/delete/:deviceId', async (req,res)=>{  //Deleta dispositivo
     try{
         const device = await Device.findByIdAndRemove(req.params.deviceId);
         return res.send("Dispositivo removido");
