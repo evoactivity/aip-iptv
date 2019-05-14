@@ -23,7 +23,6 @@ const DeviceSchema = new mongoose.Schema({
     url:{
         type: String,
         require: true,
-        lowercase: true,
     },
     obs:{
         type: String,
