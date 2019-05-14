@@ -53,11 +53,10 @@ router.post('/create_device', async (req,res)=>{    //Adiciona dispositivo
             return res.status(404).send({error: 'Aparelho já cadastrado'});
         }    
         
-        const device = Device.create(devices);
-        return res.send(device);
+        await Device.create(devices);
+        return res.send("Dispositivo registrado com sucesso");
             
     }catch(err){
-        console.log(err);
         return res.status(404).send({error: 'Erro adicionando novo dispositivo'});
     }  
 }); 
