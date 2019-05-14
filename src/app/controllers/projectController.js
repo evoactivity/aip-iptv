@@ -33,30 +33,37 @@ router.get('/:mac_address', async (req,res) =>{  //Busca dispositivo específico
 });
 
 router.post('/create_device', async (req,res)=>{    //Adiciona dispositivo
-    try{
+   /* try{
 
         const {devices} = req.body;
         const mac = devices[0].mac_address;
-
-        await Device.findOne({"mac_address": mac}, function(err, results){
-            if(results){
+      
+        try{
+            if(await Device.findOne({"mac_address": mac})){
                 return res.status(400).send({error: 'Aparelho já cadastrado'});
-            }     
-        });
+            }    
+           
+         
+            const user = User.create(req.body);
+            return res.send("Usuário registrado com sucesso");
+            
+        }catch(err){
+            return res.status(400).send({error: 'Registration failed'})
+        }
 
-      /*  await Device.create(devices, function(err, results){
+        await Device.create(devices, function(err, results){
             if(err)
             {
                 return res.status(400).send({error: 'Erro salvando dispositivo'});
             }
-        }); */   
+        });    
 
         return res.send("Dispositivo registrado com sucesso");
 
     }catch(err){
         return res.status(400).send({error: 'Erro adicionando novo dispositivo'});
-    }
-});
+    } */  
+}); 
 
 router.put('/:deviceId', async (req,res)=>{    //Atualizar dispositivo
     try{
