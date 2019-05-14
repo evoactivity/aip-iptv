@@ -54,7 +54,7 @@ router.post('/create_device', async (req,res)=>{    //Adiciona dispositivo
         }    
         
         await Device.create(devices);
-        return res.send();
+        return res.send(true);
             
     }catch(err){
         return res.status(404).send({error: 'Erro adicionando novo dispositivo'});
