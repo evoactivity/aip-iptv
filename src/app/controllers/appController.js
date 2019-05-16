@@ -8,8 +8,6 @@ const Device = require('../models/device');
 // heroku logs --tail --app turbox
 router.post('/',async (req,res)=>{  
 
-    console.log("9>>>>>>>>>>>>>>>>"+req.body);
-
     const devicePassword = req.body.password;
     const mac_address = req.body.username;
 
@@ -18,6 +16,8 @@ router.post('/',async (req,res)=>{
     }
 
     try{
+
+        console.log(">>>>>>>>>>"+req.body);
 
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
@@ -36,7 +36,7 @@ router.post('/',async (req,res)=>{
         console.log("Vai entrar no service");
         console.log(device.url);
         iptv.getIptv(device.url.trim()).then((result) => {
-            console.log("Resultado appcontrolle ->" + result );
+            console.log("Resultado appcontrolle ->" );
             return res.send(result);  
             
         })
