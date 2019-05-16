@@ -16,15 +16,12 @@ router.post('/',async (req,res)=>{
     }
 
     try{
-
+        console.log(req.body);
 
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
-                console.log("Encontrou");
-                if(devicePassword != results.devicePassword){
-                    console.log("Senha Incorreta");
-                  //  return res.status(400).send({error: '_Senha ou Usuário Incorreto_'})
-                }  
+            
+                
             }   
             else
             {
@@ -43,7 +40,6 @@ router.post('/',async (req,res)=>{
             return res.status(400).send({error: error});
         });  
        
-
     }catch(err){
         console.log("Try catch GERAL appcontrolle ->" + err );
         return res.status(400).send({error: err});
@@ -64,7 +60,7 @@ router.get('/',async (req,res)=>{
 
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
-                console.log("Encontrou");
+                console.log("Encontrou ESTA NO GET");
             }   
             else
             {
