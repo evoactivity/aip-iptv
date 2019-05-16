@@ -72,4 +72,154 @@ function get_series_info(url,vod_id){
     });
 }
 
-module.exports = {getIptv,get_vod_info,get_series_info};
+function get_live_categories(url){
+
+    var options = {
+        url: url+"&action=get_live_categories",
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/octet-stream',
+            'User-Agent': 'FelipeTartarotti'
+        }
+    }
+
+    return new Promise((resolve, reject) => {
+        request(options, function (error, response, body) {
+            
+        if (!error && response.statusCode == 200) {   
+            resolve(body);
+        }
+        else
+        console.log("Reject ->" + error );
+            reject(error);
+        });
+    });
+}
+
+function get_live_streams(url){
+
+    var options = {
+        url: url+"&action=get_live_streams",
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/octet-stream',
+            'User-Agent': 'FelipeTartarotti'
+        }
+    }
+
+    return new Promise((resolve, reject) => {
+        request(options, function (error, response, body) {
+            
+        if (!error && response.statusCode == 200) {   
+            resolve(body);
+        }
+        else
+        console.log("Reject ->" + error );
+            reject(error);
+        });
+    });
+}
+
+
+function get_vod_categories(url){
+
+    var options = {
+        url: url+"&action=get_vod_categories",
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/octet-stream',
+            'User-Agent': 'FelipeTartarotti'
+        }
+    }
+
+    return new Promise((resolve, reject) => {
+        request(options, function (error, response, body) {
+            
+        if (!error && response.statusCode == 200) {   
+            resolve(body);
+        }
+        else
+        console.log("Reject ->" + error );
+            reject(error);
+        });
+    });
+}
+
+function get_vod_streams(url){
+
+    var options = {
+        url: url+"&action=get_vod_streams",
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/octet-stream',
+            'User-Agent': 'FelipeTartarotti'
+        }
+    }
+
+    return new Promise((resolve, reject) => {
+        request(options, function (error, response, body) {
+            
+        if (!error && response.statusCode == 200) {   
+            resolve(body);
+        }
+        else
+        console.log("Reject ->" + error );
+            reject(error);
+        });
+    });
+}
+
+function get_series_categories(url){
+
+    var options = {
+        url: url+"&action=get_series_categories",
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/octet-stream',
+            'User-Agent': 'FelipeTartarotti'
+        }
+    }
+
+    return new Promise((resolve, reject) => {
+        request(options, function (error, response, body) {
+            
+        if (!error && response.statusCode == 200) {   
+            resolve(body);
+        }
+        else
+        console.log("Reject ->" + error );
+            reject(error);
+        });
+    });
+}
+
+function get_series(url){
+
+    var options = {
+        url: url+"&action=get_series",
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/octet-stream',
+            'User-Agent': 'FelipeTartarotti'
+        }
+    }
+
+    return new Promise((resolve, reject) => {
+        request(options, function (error, response, body) {
+            
+        if (!error && response.statusCode == 200) {   
+            resolve(body);
+        }
+        else
+        console.log("Reject ->" + error );
+            reject(error);
+        });
+    });
+}
+
+
+
+
+
+
+module.exports = {getIptv,get_vod_info,get_series_info,get_live_categories,get_live_streams,get_vod_categories,get_vod_streams,get_series_categories,get_series};
