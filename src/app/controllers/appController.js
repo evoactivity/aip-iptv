@@ -17,7 +17,8 @@ router.post('/',async (req,res)=>{
 
     try{
 
-        console.log(req.body);
+        console.log("ACTION" + req.body.action);
+        console.log("VOD_ID" + req.body.vod_id);
 
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
