@@ -17,8 +17,13 @@ router.post('/',async (req,res)=>{
 
     try{
 
-        console.log("ACTION" + req.body.action);
-        console.log("VOD_ID" + req.body.vod_id);
+        if(req.body.action.trim() == "get_vod_info"){
+            console.log("ACTION" + req.body.action);
+            console.log("VOD_ID" + req.body.vod_id);
+
+        }
+
+    
 
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
