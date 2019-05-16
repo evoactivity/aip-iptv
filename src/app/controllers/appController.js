@@ -16,13 +16,10 @@ router.post('/',async (req,res)=>{
     }
 
     try{
-
-       
     
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
             
-
             }   
             else
             {
@@ -31,39 +28,39 @@ router.post('/',async (req,res)=>{
             }
         });
 
-        if(req.body.action.trim() == "get_series_info"){
-            iptv.get_series_info(device.url.trim(),req.body.series_id.trim()).then((result) => {
-                console.log("Resultado appcontrolle get_series_info ->" );
-                return res.send(result);  
-            })
-            .catch((error) => {
-                console.log("Catch appcontrolle ->" + error );
-                return res.status(400).send({error: error});
-            });  
+        switch(req.body.action) {
+            case false:
+                iptv.getIptv(device.url.trim()).then((result) => {
+                    console.log("Resultado appcontrolle ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    return res.status(400).send({error: error});
+                });  
+                
+                break;
+            case "get_series_info":
+                iptv.get_series_info(device.url.trim(),req.body.series_id.trim()).then((result) => {
+                    console.log("Resultado appcontrolle get_series_info ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    return res.status(400).send({error: error});
+                }); 
+                 break;
+            case "get_vod_info":
+                iptv.get_vod_info(device.url.trim(),req.body.vod_id.trim()).then((result) => {
+                    console.log("Resultado appcontrolle VODINFO ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    return res.status(400).send({error: error});
+                }); 
+                break;
         }
-        
-        if(req.body.action.trim() == "get_vod_info"){
-            iptv.get_vod_info(device.url.trim(),req.body.vod_id.trim()).then((result) => {
-                console.log("Resultado appcontrolle VODINFO ->" );
-                return res.send(result);  
-            })
-            .catch((error) => {
-                console.log("Catch appcontrolle ->" + error );
-                return res.status(400).send({error: error});
-            });  
-        }
-        
-        if(!req.body.action){
-            iptv.getIptv(device.url.trim()).then((result) => {
-                console.log("Resultado appcontrolle ->" );
-                return res.send(result);  
-            })
-            .catch((error) => {
-                console.log("Catch appcontrolle ->" + error );
-                return res.status(400).send({error: error});
-            });  
-        }
-  
     }catch(err){
         console.log("Try catch GERAL appcontrolle ->" + err );
         return res.status(400).send({error: err});
