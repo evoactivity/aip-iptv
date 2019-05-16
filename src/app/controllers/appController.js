@@ -5,8 +5,10 @@ const Device = require('../models/device');
 
 
 //http://purpleserver.net:80/player_api.php?username=Felipe&password=vvoYEf9UFn&type=m3u_plus&output=m3u8
-// heroku logs --tail --app gentle-bastion-50455
+// heroku logs --tail --app turbox
 router.post('/',async (req,res)=>{  
+
+    console.log("9>>>>>>>>>>>>>>>>"+req.body);
 
     const devicePassword = req.body.password;
     const mac_address = req.body.username;
