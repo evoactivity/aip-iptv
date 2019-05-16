@@ -17,7 +17,7 @@ router.post('/',async (req,res)=>{
 
     try{
 
-        console.log(req.body.action);
+       
     
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
@@ -52,8 +52,8 @@ router.post('/',async (req,res)=>{
                 return res.status(400).send({error: error});
             });  
         }
-        else
-        {
+        
+        if(!req.body.action){
             iptv.getIptv(device.url.trim()).then((result) => {
                 console.log("Resultado appcontrolle ->" );
                 return res.send(result);  
