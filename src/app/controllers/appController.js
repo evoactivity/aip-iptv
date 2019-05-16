@@ -17,13 +17,6 @@ router.post('/',async (req,res)=>{
 
     try{
 
-        if(req.body.action.trim() == "get_vod_info"){
-            console.log("ACTION" + req.body.action);
-            console.log("VOD_ID" + req.body.vod_id);
-
-        }
-
-    
 
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
@@ -39,17 +32,35 @@ router.post('/',async (req,res)=>{
                 return res.status(400).send({error: '_Dispositivo não cadastrado_'});
             }
         });
-        console.log("Vai entrar no service");
-        console.log(device.url);
-        iptv.getIptv(device.url.trim()).then((result) => {
-            console.log("Resultado appcontrolle ->" );
-            return res.send(result);  
-            
-        })
-        .catch((error) => {
-            console.log("Catch appcontrolle ->" + error );
-            return res.status(400).send({error: error});
-        });  
+  
+
+        if(req.body.action.trim() == "get_vod_info"){
+            iptv.getVod(device.url.trim()).then((result) => {
+                console.log("Resultado appcontrolle ->" );
+                return res.send(result);  
+            })
+            .catch((error) => {
+                console.log("Catch appcontrolle ->" + error );
+                return res.status(400).send({error: error});
+            });  
+        }
+        else
+        {
+            iptv.getIptv(device.url.trim()).then((result) => {
+                console.log("Resultado appcontrolle ->" );
+                return res.send(result);  
+            })
+            .catch((error) => {
+                console.log("Catch appcontrolle ->" + error );
+                return res.status(400).send({error: error});
+            });  
+        }
+
+
+
+
+
+        
 
     }catch(err){
         console.log("Try catch GERAL appcontrolle ->" + err );
