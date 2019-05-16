@@ -26,10 +26,10 @@ function getIptv(url){
     });
 }
 
-function getVod(url){
+function get_vod_info(url,vod_id){
 
     var options = {
-        url: url+"&action=get_vod_categories",
+        url: url+"&action=get_vod_info&vod_id="+vod_id,
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -52,4 +52,4 @@ function getVod(url){
     });
 }
 
-module.exports = {getIptv,getVod};
+module.exports = {getIptv,get_vod_info};
