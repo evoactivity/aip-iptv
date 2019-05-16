@@ -30,7 +30,7 @@ function getVod(url){
 
     var options = {
         url: url+"&action=get_vod_categories",
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
             'User-Agent': 'FelipeTartarotti'
