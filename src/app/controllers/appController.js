@@ -29,17 +29,6 @@ router.post('/',async (req,res)=>{
         });
 
         switch(req.body.action) {
-            case false:
-                iptv.getIptv(device.url.trim()).then((result) => {
-                    console.log("Resultado appcontrolle ->" );
-                    return res.send(result);  
-                })
-                .catch((error) => {
-                    console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
-                });  
-                
-                break;
             case "get_series_info":
                 iptv.get_series_info(device.url.trim(),req.body.series_id.trim()).then((result) => {
                     console.log("Resultado appcontrolle get_series_info ->" );
@@ -59,6 +48,16 @@ router.post('/',async (req,res)=>{
                     console.log("Catch appcontrolle ->" + error );
                     return res.status(400).send({error: error});
                 }); 
+                break;
+            default:
+                iptv.getIptv(device.url.trim()).then((result) => {
+                    console.log("Resultado appcontrolle ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    return res.status(400).send({error: error});
+                });  
                 break;
         }
     }catch(err){
