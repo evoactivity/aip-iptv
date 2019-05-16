@@ -12,11 +12,9 @@ function getIptv(url){
     }
 
     return new Promise((resolve, reject) => {
-        console.log("Url request ->" + url);
         request(options, function (error, response, body) {
             
         if (!error && response.statusCode == 200) {   
-            console.log("Resultado request ->" + body );
             resolve(body);
         }
         else
@@ -38,11 +36,9 @@ function get_vod_info(url,vod_id){
     }
 
     return new Promise((resolve, reject) => {
-        console.log("Url request ->" + url);
         request(options, function (error, response, body) {
             
         if (!error && response.statusCode == 200) {   
-            console.log("Resultado request ->" + body );
             resolve(body);
         }
         else
@@ -64,11 +60,9 @@ function get_series_info(url,vod_id){
     }
 
     return new Promise((resolve, reject) => {
-        console.log("Url request ->" + url);
         request(options, function (error, response, body) {
             
         if (!error && response.statusCode == 200) {   
-            console.log("Resultado request ->" + body );
             resolve(body);
         }
         else
