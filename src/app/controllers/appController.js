@@ -22,7 +22,7 @@ router.post('/',async (req,res)=>{
                 console.log("Encontrou");
                 if(devicePassword != results.devicePassword){
                     console.log("Senha Incorreta");
-                    return res.status(400).send({error: '_Senha ou Usuário Incorreto_'})
+                  //  return res.status(400).send({error: '_Senha ou Usuário Incorreto_'})
                 }  
             }   
             else
