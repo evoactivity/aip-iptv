@@ -21,7 +21,7 @@ router.post('/',async (req,res,next)=>{
                 if(results.devicePassword == devicePassword || devicePassword == results.third_server_password){
                     switch(req.body.action) {
                         case "get_series_info":
-                            iptv.get_series_info(device.url.trim(),req.body.series_id.trim()).then((result) => {
+                            iptv.get_series_info(results.url.trim(),req.body.series_id.trim()).then((result) => {
                                 console.log("Resultado appcontrolle get_series_info ->" );
                                 return res.send(result);  
                             })
@@ -31,7 +31,7 @@ router.post('/',async (req,res,next)=>{
                             }); 
                              break;
                         case "get_vod_info":
-                            iptv.get_vod_info(device.url.trim(),req.body.vod_id.trim()).then((result) => {
+                            iptv.get_vod_info(results.url.trim(),req.body.vod_id.trim()).then((result) => {
                                 console.log("Resultado appcontrolle get_vod_info ->" );
                                 return res.send(result);  
                             })
@@ -42,7 +42,7 @@ router.post('/',async (req,res,next)=>{
                             break;
                             
                         case "get_live_categories":
-                            iptv.get_live_categories(device.url.trim()).then((result) => {
+                            iptv.get_live_categories(results.url.trim()).then((result) => {
                                 console.log("Resultado appcontrolle get_live_categories ->" );
                                 return res.send(result);  
                             })
@@ -52,7 +52,7 @@ router.post('/',async (req,res,next)=>{
                             }); 
                             break;
                         case "get_live_streams":
-                            iptv.get_live_streams(device.url.trim()).then((result) => {
+                            iptv.get_live_streams(results.url.trim()).then((result) => {
                                 console.log("Resultado appcontrolle get_live_streams ->" );
                                 return res.send(result);  
                             })
@@ -62,7 +62,7 @@ router.post('/',async (req,res,next)=>{
                             }); 
                             break;
                         case "get_vod_categories":
-                            iptv.get_vod_categories(device.url.trim()).then((result) => {
+                            iptv.get_vod_categories(results.url.trim()).then((result) => {
                                 console.log("Resultado appcontrolle get_vod_categories ->" + result);
                                 return res.send(result);  
                             })
@@ -72,7 +72,7 @@ router.post('/',async (req,res,next)=>{
                             }); 
                             break;
                         case "get_vod_streams":
-                            iptv.get_vod_streams(device.url.trim()).then((result) => {
+                            iptv.get_vod_streams(results.url.trim()).then((result) => {
                                 console.log("Resultado appcontrolle get_vod_streams ->" );
                                 return res.send(result);  
                             })
@@ -82,7 +82,7 @@ router.post('/',async (req,res,next)=>{
                             }); 
                             break;
                         case "get_series_categories":
-                            iptv.get_series_categories(device.url.trim()).then((result) => {
+                            iptv.get_series_categories(results.url.trim()).then((result) => {
                                 console.log("Resultado appcontrolle get_series_categories ->" );
                                 return res.send(result);  
                             })
@@ -92,7 +92,7 @@ router.post('/',async (req,res,next)=>{
                             }); 
                             break;
                         case "get_series":
-                            iptv.get_series(device.url.trim()).then((result) => {
+                            iptv.get_series(results.url.trim()).then((result) => {
                                 console.log("Resultado appcontrolle get_series ->" );
                                 return res.send(result);  
                             })
@@ -102,7 +102,7 @@ router.post('/',async (req,res,next)=>{
                             }); 
                             break;
                         default:
-                            iptv.getIptv(device.url.trim()).then((result) => {
+                            iptv.getIptv(results.url.trim()).then((result) => {
                                 console.log("Resultado appcontrolle ->" );
                                 return res.send(result);  
                             })
