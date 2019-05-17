@@ -74,7 +74,7 @@ router.post('/',async (req,res)=>{
                 break;
             case "get_vod_categories":
                 iptv.get_vod_categories(device.url.trim()).then((result) => {
-                    console.log("Resultado appcontrolle get_vod_categories ->" );
+                    console.log("Resultado appcontrolle get_vod_categories ->" + result);
                     return res.send(result);  
                 })
                 .catch((error) => {
@@ -83,7 +83,7 @@ router.post('/',async (req,res)=>{
                 }); 
                 break;
             case "get_vod_streams":
-                iptv.get_vod_categories(device.url.trim()).then((result) => {
+                iptv.get_vod_streams(device.url.trim()).then((result) => {
                     console.log("Resultado appcontrolle get_vod_streams ->" );
                     return res.send(result);  
                 })
@@ -93,7 +93,7 @@ router.post('/',async (req,res)=>{
                 }); 
                 break;
             case "get_series_categories":
-                iptv.get_vod_categories(device.url.trim()).then((result) => {
+                iptv.get_series_categories(device.url.trim()).then((result) => {
                     console.log("Resultado appcontrolle get_series_categories ->" );
                     return res.send(result);  
                 })
