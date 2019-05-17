@@ -22,6 +22,9 @@ router.post('/',async (req,res)=>{
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
                 if(results.password != devicePassword){
+                    console.log(results.password);
+                    console.log(devicePassword);
+
                     console.log("senha incorreta")
                     return res.status(401);
                 }
