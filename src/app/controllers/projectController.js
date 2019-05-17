@@ -73,6 +73,8 @@ router.put('/:deviceId', async (req,res)=>{    //Atualizar dispositivo
                 result.devicePassword = devices[0].devicePassword;
                 result.url = devices[0].url;
                 result.obs = devices[0].obs;
+                result.third_server_password = devices[0].third_server_password;
+                result.third_server_login = devices[0].third_server_login;
                 result.save();
                 return res.send();
             }
