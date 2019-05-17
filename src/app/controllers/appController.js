@@ -11,20 +11,13 @@ router.post('/',async (req,res)=>{
     const devicePassword = req.body.password;
     const mac_address = req.body.username;
 
-    if(devicePassword == null || mac_address == null){
-        return res.status(400).send({error: '_Preencha todos os campos_'});
-    }
-
     try{
 
         console.log(req.body);
     
         const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
-                if(results.password != devicePassword){
-                    console.log(results.password);
-                    console.log(devicePassword);
-
+                if(results.devicePassword != devicePassword){
                     console.log("senha incorreta")
                     return res.status(401);
                 }
@@ -33,7 +26,7 @@ router.post('/',async (req,res)=>{
             else
             {
                 console.log("Dispositivo não cadastrado");
-                return res.status(400).send({error: '_Dispositivo não cadastrado_'});
+                return res.status(401);
             }
         });
 
@@ -45,7 +38,7 @@ router.post('/',async (req,res)=>{
                 })
                 .catch((error) => {
                     console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
+                    return res.status(400);
                 }); 
                  break;
             case "get_vod_info":
@@ -55,7 +48,7 @@ router.post('/',async (req,res)=>{
                 })
                 .catch((error) => {
                     console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
+                    return res.status(400);
                 }); 
                 break;
                 
@@ -66,7 +59,7 @@ router.post('/',async (req,res)=>{
                 })
                 .catch((error) => {
                     console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
+                    return res.status(400);
                 }); 
                 break;
             case "get_live_streams":
@@ -76,7 +69,7 @@ router.post('/',async (req,res)=>{
                 })
                 .catch((error) => {
                     console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
+                    return res.status(400);
                 }); 
                 break;
             case "get_vod_categories":
@@ -86,7 +79,7 @@ router.post('/',async (req,res)=>{
                 })
                 .catch((error) => {
                     console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
+                    return res.status(400);
                 }); 
                 break;
             case "get_vod_streams":
@@ -96,7 +89,7 @@ router.post('/',async (req,res)=>{
                 })
                 .catch((error) => {
                     console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
+                    return res.status(400);
                 }); 
                 break;
             case "get_series_categories":
@@ -106,7 +99,7 @@ router.post('/',async (req,res)=>{
                 })
                 .catch((error) => {
                     console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
+                    return res.status(400);
                 }); 
                 break;
             case "get_series":
@@ -116,7 +109,7 @@ router.post('/',async (req,res)=>{
                 })
                 .catch((error) => {
                     console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
+                    return res.status(400);
                 }); 
                 break;
             default:
@@ -126,7 +119,7 @@ router.post('/',async (req,res)=>{
                 })
                 .catch((error) => {
                     console.log("Catch appcontrolle ->" + error );
-                    return res.status(400).send({error: error});
+                    return res.status(400);
                 });  
                 break;
         }
