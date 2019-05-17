@@ -27,7 +27,7 @@ router.post('/',async (req,res,next)=>{
                             })
                             .catch((error) => {
                                 console.log("Catch appcontrolle ->" + error );
-                                return res.status(400);
+                                next(error);
                             }); 
                              break;
                         case "get_vod_info":
@@ -37,7 +37,7 @@ router.post('/',async (req,res,next)=>{
                             })
                             .catch((error) => {
                                 console.log("Catch appcontrolle ->" + error );
-                                return res.status(400);
+                                next(error);
                             }); 
                             break;
                             
@@ -48,7 +48,7 @@ router.post('/',async (req,res,next)=>{
                             })
                             .catch((error) => {
                                 console.log("Catch appcontrolle ->" + error );
-                                return res.status(400);
+                                next(error);
                             }); 
                             break;
                         case "get_live_streams":
@@ -58,7 +58,7 @@ router.post('/',async (req,res,next)=>{
                             })
                             .catch((error) => {
                                 console.log("Catch appcontrolle ->" + error );
-                                return res.status(400);
+                                next(error);
                             }); 
                             break;
                         case "get_vod_categories":
@@ -68,7 +68,7 @@ router.post('/',async (req,res,next)=>{
                             })
                             .catch((error) => {
                                 console.log("Catch appcontrolle ->" + error );
-                                return res.status(400);
+                                next(error);
                             }); 
                             break;
                         case "get_vod_streams":
@@ -78,7 +78,7 @@ router.post('/',async (req,res,next)=>{
                             })
                             .catch((error) => {
                                 console.log("Catch appcontrolle ->" + error );
-                                return res.status(400);
+                                next(error);
                             }); 
                             break;
                         case "get_series_categories":
@@ -88,7 +88,7 @@ router.post('/',async (req,res,next)=>{
                             })
                             .catch((error) => {
                                 console.log("Catch appcontrolle ->" + error );
-                                return res.status(400);
+                                next(error);
                             }); 
                             break;
                         case "get_series":
@@ -98,7 +98,7 @@ router.post('/',async (req,res,next)=>{
                             })
                             .catch((error) => {
                                 console.log("Catch appcontrolle ->" + error );
-                                return res.status(400);
+                                return next(error);
                             }); 
                             break;
                         default:
@@ -108,7 +108,7 @@ router.post('/',async (req,res,next)=>{
                             })
                             .catch((error) => {
                                 console.log("Catch appcontrolle ->" + error );
-                                return res.status(400);
+                                return  next(error);
                             });  
                             break;
                     }
