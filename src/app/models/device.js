@@ -16,6 +16,14 @@ const DeviceSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    third_server_login:{
+        type: String,
+        require: true,
+    },
+    third_server_password:{
+        type: String,
+        require: true,
+    },
     createdAt:{
         type: Date,
         default:Date.now,
