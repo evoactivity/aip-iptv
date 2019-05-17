@@ -123,7 +123,8 @@ router.post('/',async (req,res,next)=>{
             else
             {
                 console.log("Dispositivo não cadastrado");
-                return res.status(401);
+                next('Dispositivo não cadastrado');
+    
             }
         });
 
