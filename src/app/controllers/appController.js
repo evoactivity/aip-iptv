@@ -115,7 +115,7 @@ router.post('/',async (req,res,next)=>{
                 else
                 {
                     console.log("senha incorreta");
-                    throw new Error('Senha incorreta');
+                    res.status(404).send('Senha incorreta');
                 }
                  
             }   
