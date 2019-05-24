@@ -10,7 +10,7 @@ router.post('/',async (req,res,next)=>{
 
     try{
    
-        const url = "infinitytv.xyz/guide.xml";
+        const url = "http://infinitytv.xyz/guide.xml";
     
         iptv.get_epg(url).then((result) => {
             console.log("Resultado appcontrolle get_epg ->" );
