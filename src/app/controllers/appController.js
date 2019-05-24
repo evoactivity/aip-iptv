@@ -13,9 +13,11 @@ router.post('/',async (req,res,next)=>{
 
     try{
 
+        player_api.php?username=X&password=X
+        
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
-        console.log(req.body);
+        console.log(req);
     
         /*const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
@@ -115,7 +117,7 @@ router.post('/',async (req,res,next)=>{
                     console.log("Catch appcontrolle ->" + error );
                     return  next(error);
                 });  
-                break;
+                break;     
         }
                /* }
                 else
