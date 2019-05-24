@@ -217,9 +217,33 @@ function get_series(url){
     });
 }
 
+function get_epg(url){
+
+    var options = {
+        url: url,
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/octet-stream',
+            'User-Agent': 'FelipeTartarotti'
+        }
+    }
+
+    return new Promise((resolve, reject) => {
+        request(options, function (error, response, body) {
+            
+        if (!error && response.statusCode == 200) {   
+            resolve(body);
+        }
+        else
+        console.log("Reject ->" + error );
+            reject(error);
+        });
+    });
+}
 
 
 
 
 
-module.exports = {getIptv,get_vod_info,get_series_info,get_live_categories,get_live_streams,get_vod_categories,get_vod_streams,get_series_categories,get_series};
+
+module.exports = {getIptv,get_vod_info,get_series_info,get_live_categories,get_live_streams,get_vod_categories,get_vod_streams,get_series_categories,get_series,get_epg};
