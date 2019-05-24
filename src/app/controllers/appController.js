@@ -20,11 +20,12 @@ router.post('/',async (req,res,next)=>{
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
         if(req.query.action){
-            var action = req.query.action;
+            var body = req.query;
+           
         }
         else
         {
-            var action = req.body.action;
+            var body = req.body;
         }
         
         console.log(req.query.action);
@@ -33,12 +34,10 @@ router.post('/',async (req,res,next)=>{
             if(results){
                 console.log('Encontrou MAC');
                 if(results.devicePassword == devicePassword || devicePassword == results.third_server_password){
-                    */
-                   
-                    
-        switch(action) {
+                    */           
+        switch(body.action) {
             case "get_series_info":
-                iptv.get_series_info(url,req.body.series_id.trim()).then((result) => {
+                iptv.get_series_info(url,body.series_id.trim()).then((result) => {
                     console.log("Resultado appcontrolle get_series_info ->" );
                     return res.send(result);  
                 })
@@ -48,7 +47,7 @@ router.post('/',async (req,res,next)=>{
                 }); 
                     break;
             case "get_vod_info":
-                iptv.get_vod_info(url,req.body.vod_id.trim()).then((result) => {
+                iptv.get_vod_info(url,body.vod_id.trim()).then((result) => {
                     console.log("Resultado appcontrolle get_vod_info ->" );
                     return res.send(result);  
                 })
