@@ -13,7 +13,7 @@ router.post('/',async (req,res,next)=>{
 
     try{
 
-        player_api.php?username=X&password=X
+        //player_api.php?username=X&password=X
         
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
