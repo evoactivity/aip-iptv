@@ -21,7 +21,7 @@ router.post('/',async (req,res,next)=>{
 
         if(req.query.action){
             var body = req.query;
-            consolelog("uau->"+body.vod_id);
+            console.log("uau->"+body.vod_id);
            
         }
         else
