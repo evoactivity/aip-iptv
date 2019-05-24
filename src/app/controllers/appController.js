@@ -21,6 +21,7 @@ router.post('/',async (req,res,next)=>{
 
         if(req.query.action){
             var body = req.query;
+            consolelog("uau->"+body.vod_id);
            
         }
         else
@@ -48,7 +49,7 @@ router.post('/',async (req,res,next)=>{
                     break;
             case "get_vod_info":
                 iptv.get_vod_info(url,body.vod_id.trim()).then((result) => {
-                    console.log("Resultado appcontrolle get_vod_info ->" );
+                    console.log("Resultado appcontrolle get_vod_info ->" ,result);
                     return res.send(result);  
                 })
                 .catch((error) => {
