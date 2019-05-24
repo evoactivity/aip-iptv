@@ -20,6 +20,7 @@ router.post('/',async (req,res,next)=>{
         console.log(req.query.action);
 
         var action = req.query.action;
+
     
         /*const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
