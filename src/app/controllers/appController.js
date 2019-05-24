@@ -13,14 +13,21 @@ router.post('/',async (req,res,next)=>{
 
     try{
 
+        console.log(req);
+
         //player_api.php?username=X&password=X
         
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
+        if(req.query.action){
+            var action = req.query.action;
+        }
+        else
+        {
+            var action = req.body.action;
+        }
+        
         console.log(req.query.action);
-
-        var action = req.query.action;
-
     
         /*const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
