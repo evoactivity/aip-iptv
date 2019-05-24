@@ -13,108 +13,111 @@ router.post('/',async (req,res,next)=>{
 
     try{
 
-        console.log(mac_address);
+        const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
         console.log(req.body);
     
-        const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
+        /*const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
                 console.log('Encontrou MAC');
                 if(results.devicePassword == devicePassword || devicePassword == results.third_server_password){
-                    switch(req.body.action) {
-                        case "get_series_info":
-                            iptv.get_series_info(results.url.trim(),req.body.series_id.trim()).then((result) => {
-                                console.log("Resultado appcontrolle get_series_info ->" );
-                                return res.send(result);  
-                            })
-                            .catch((error) => {
-                                console.log("Catch appcontrolle ->" + error );
-                                next(error);
-                            }); 
-                             break;
-                        case "get_vod_info":
-                            iptv.get_vod_info(results.url.trim(),req.body.vod_id.trim()).then((result) => {
-                                console.log("Resultado appcontrolle get_vod_info ->" );
-                                return res.send(result);  
-                            })
-                            .catch((error) => {
-                                console.log("Catch appcontrolle ->" + error );
-                                next(error);
-                            }); 
-                            break;
-                            
-                        case "get_live_categories":
-                            iptv.get_live_categories(results.url.trim()).then((result) => {
-                                console.log("Resultado appcontrolle get_live_categories ->" );
-                                return res.send(result);  
-                            })
-                            .catch((error) => {
-                                console.log("Catch appcontrolle ->" + error );
-                                next(error);
-                            }); 
-                            break;
-                        case "get_live_streams":
-                            iptv.get_live_streams(results.url.trim()).then((result) => {
-                                console.log("Resultado appcontrolle get_live_streams ->" );
-                                return res.send(result);  
-                            })
-                            .catch((error) => {
-                                console.log("Catch appcontrolle ->" + error );
-                                next(error);
-                            }); 
-                            break;
-                        case "get_vod_categories":
-                            iptv.get_vod_categories(results.url.trim()).then((result) => {
-                                console.log("Resultado appcontrolle get_vod_categories ->" + result);
-                                return res.send(result);  
-                            })
-                            .catch((error) => {
-                                console.log("Catch appcontrolle ->" + error );
-                                next(error);
-                            }); 
-                            break;
-                        case "get_vod_streams":
-                            iptv.get_vod_streams(results.url.trim()).then((result) => {
-                                console.log("Resultado appcontrolle get_vod_streams ->" );
-                                return res.send(result);  
-                            })
-                            .catch((error) => {
-                                console.log("Catch appcontrolle ->" + error );
-                                next(error);
-                            }); 
-                            break;
-                        case "get_series_categories":
-                            iptv.get_series_categories(results.url.trim()).then((result) => {
-                                console.log("Resultado appcontrolle get_series_categories ->" );
-                                return res.send(result);  
-                            })
-                            .catch((error) => {
-                                console.log("Catch appcontrolle ->" + error );
-                                next(error);
-                            }); 
-                            break;
-                        case "get_series":
-                            iptv.get_series(results.url.trim()).then((result) => {
-                                console.log("Resultado appcontrolle get_series ->" );
-                                return res.send(result);  
-                            })
-                            .catch((error) => {
-                                console.log("Catch appcontrolle ->" + error );
-                                return next(error);
-                            }); 
-                            break;
-                        default:
-                            iptv.getIptv(results.url.trim()).then((result) => {
-                                console.log("Resultado appcontrolle ->" );
-                                return res.send(result);  
-                            })
-                            .catch((error) => {
-                                console.log("Catch appcontrolle ->" + error );
-                                return  next(error);
-                            });  
-                            break;
-                    }
-                }
+                    */
+                   
+                    
+        switch(req.body.action) {
+            case "get_series_info":
+                iptv.get_series_info(url,req.body.series_id.trim()).then((result) => {
+                    console.log("Resultado appcontrolle get_series_info ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    next(error);
+                }); 
+                    break;
+            case "get_vod_info":
+                iptv.get_vod_info(url,req.body.vod_id.trim()).then((result) => {
+                    console.log("Resultado appcontrolle get_vod_info ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    next(error);
+                }); 
+                break;
+                
+            case "get_live_categories":
+                iptv.get_live_categories(url).then((result) => {
+                    console.log("Resultado appcontrolle get_live_categories ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    next(error);
+                }); 
+                break;
+            case "get_live_streams":
+                iptv.get_live_streams(url).then((result) => {
+                    console.log("Resultado appcontrolle get_live_streams ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    next(error);
+                }); 
+                break;
+            case "get_vod_categories":
+                iptv.get_vod_categories(url).then((result) => {
+                    console.log("Resultado appcontrolle get_vod_categories ->");
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    next(error);
+                }); 
+                break;
+            case "get_vod_streams":
+                iptv.get_vod_streams(url).then((result) => {
+                    console.log("Resultado appcontrolle get_vod_streams ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    next(error);
+                }); 
+                break;
+            case "get_series_categories":
+                iptv.get_series_categories(url).then((result) => {
+                    console.log("Resultado appcontrolle get_series_categories ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    next(error);
+                }); 
+                break;
+            case "get_series":
+                iptv.get_series(url).then((result) => {
+                    console.log("Resultado appcontrolle get_series ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    return next(error);
+                }); 
+                break;
+            default:
+                iptv.getIptv(url).then((result) => {
+                    console.log("Resultado appcontrolle ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    return  next(error);
+                });  
+                break;
+        }
+               /* }
                 else
                 {
                     console.log("senha incorreta");
@@ -128,8 +131,7 @@ router.post('/',async (req,res,next)=>{
                 next('Dispositivo não cadastrado');
     
             }
-        });
-
+        });*/
         
     }catch(err){
         console.log("Try catch GERAL appcontrolle ->" + err );
@@ -139,6 +141,9 @@ router.post('/',async (req,res,next)=>{
 
 
 module.exports = app => app.use('/player_api.php',router);
+
+
+
 /*
      
 
