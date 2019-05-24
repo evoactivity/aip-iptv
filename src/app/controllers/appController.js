@@ -17,7 +17,9 @@ router.post('/',async (req,res,next)=>{
         
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
-        console.log(req.query);
+        console.log(req.query.action);
+
+        var action = req.query.action;
     
         /*const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
@@ -26,7 +28,7 @@ router.post('/',async (req,res,next)=>{
                     */
                    
                     
-        switch(req.body.action) {
+        switch(action) {
             case "get_series_info":
                 iptv.get_series_info(url,req.body.series_id.trim()).then((result) => {
                     console.log("Resultado appcontrolle get_series_info ->" );
