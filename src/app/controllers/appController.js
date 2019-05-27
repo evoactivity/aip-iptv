@@ -13,20 +13,19 @@ router.get('/',async (req,res,next)=>{
 
     try{
 
-        console.log(req);
-
         //player_api.php?username=X&password=X
         
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
         if(req.query.action){
             var body = req.query;
-            console.log("uau->"+body.vod_id);
+            console.log("req.quer->"+body);
            
         }
         else
         {
             var body = req.body;
+            console.log("req.body>"+body);
         }
         
         console.log(req.query.action);
@@ -49,7 +48,7 @@ router.get('/',async (req,res,next)=>{
                     break;
             case "get_vod_info":
                 iptv.get_vod_info(url,body.vod_id.trim()).then((result) => {
-                    console.log("Resultado appcontrolle get_vod_info ->" ,result);
+                    console.log("Resultado appcontrolle get_vod_info ->");
                     return res.send(result);  
                 })
                 .catch((error) => {
