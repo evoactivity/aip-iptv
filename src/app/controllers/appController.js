@@ -6,6 +6,7 @@ const Device = require('../models/device');
 
 //http://purpleserver.net:80/player_api.php?username=Felipe&password=vvoYEf9UFn&type=m3u_plus&output=m3u8
 // heroku logs --tail --app turbox
+//"/player_api.php?username=swe&password=sww&action=get_short_epg&stream_id=18319"
 router.get('/',async (req,res,next)=>{  
 
     const devicePassword = req.body.password;
@@ -14,7 +15,8 @@ router.get('/',async (req,res,next)=>{
     try{
 
         //player_api.php?username=X&password=X
-        
+        //http://psrv.io:80/live/Felipe/vvoYEf9UFn/22886.m3u8
+        //http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn&action=get_short_epg&stream_id=18301
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
         if(req.query.action){
@@ -28,7 +30,7 @@ router.get('/',async (req,res,next)=>{
             console.log("req.body>"+body);
         }
         
-        console.log(req.query.action);
+        console.log(body.action);
     
         /*const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
             if(results){
@@ -110,6 +112,16 @@ router.get('/',async (req,res,next)=>{
             case "get_series":
                 iptv.get_series(url).then((result) => {
                     console.log("Resultado appcontrolle get_series ->" );
+                    return res.send(result);  
+                })
+                .catch((error) => {
+                    console.log("Catch appcontrolle ->" + error );
+                    return next(error);
+                }); 
+                break;
+            case "get_short_epg":
+                iptv.get_short_epg(url,body.stream_id).then((result) => {
+                    console.log("Resultado appcontrolle get_short_epg ->" );
                     return res.send(result);  
                 })
                 .catch((error) => {
