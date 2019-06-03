@@ -9,12 +9,9 @@ const Device = require('../models/device');
 //"/player_api.php?username=swe&password=sww&action=get_short_epg&stream_id=18319"
 router.post('/',async (req,res,next)=>{  
 
-    const devicePassword = req.body.password;
-    const mac_address = req.body.username;
-
     try{
         var body;
-        console.log(req.body);
+        console.log(req);
 
         //player_api.php?username=X&password=X
         //http://psrv.io:80/live/Felipe/vvoYEf9UFn/22886.m3u8
