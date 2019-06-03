@@ -21,17 +21,17 @@ router.post('/',async (req,res,next)=>{
         //http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn&action=get_short_epg&stream_id=18301
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
-        if(req.query.action)
-        {
-            body = req.query;
-            console.log("req.quer->"+body);
-        }
+      //  if(req.query.action)
+      //  {
+      //      body = req.query;
+//console.log("req.quer->"+body);
+//}
         
-        if(req.body.action)
-        {
-            body = req.body;
-            console.log("req.body>"+body);
-        }
+       // if(req.body.action)
+       // {
+         //   body = req.body;
+          //  console.log("req.body>"+body);
+       // }
         
     
         /*const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
@@ -39,7 +39,7 @@ router.post('/',async (req,res,next)=>{
                 console.log('Encontrou MAC');
                 if(results.devicePassword == devicePassword || devicePassword == results.third_server_password){
                     */           
-        switch(body.action) {
+        switch(body) {
             case "get_series_info":
                 iptv.get_series_info(url,body.series_id.trim()).then((result) => {
                     console.log("Resultado appcontrolle get_series_info ->" );
