@@ -11,10 +11,9 @@ router.post('/',async (req,res,next)=>{
       
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
-    
-       
+        
         iptv.getPanelApi(url).then((result) => {
-            console.log("Resultado appcontrolle ->" );
+            console.log("Resultado getPanelApi appcontrolle ->" );
             return res.send(result);  
         })
         .catch((error) => {
