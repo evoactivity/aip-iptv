@@ -14,7 +14,7 @@ router.post('/',async (req,res,next)=>{
 
     try{
 
-        console.log(req);
+        console.log(req.body);
 
         //player_api.php?username=X&password=X
         //http://psrv.io:80/live/Felipe/vvoYEf9UFn/22886.m3u8
@@ -132,6 +132,7 @@ router.post('/',async (req,res,next)=>{
                 }); 
                 break;
             default:
+                console.log("entrou");
                 iptv.getIptv(url).then((result) => {
                     console.log("Resultado appcontrolle ->" );
                     return res.send(result);  
