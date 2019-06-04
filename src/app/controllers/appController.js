@@ -11,6 +11,8 @@ router.post('/',async (req,res,next)=>{
 
     try{
         var body;
+
+        console.log(req)
       
 
         //player_api.php?username=X&password=X
