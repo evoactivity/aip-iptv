@@ -6,11 +6,12 @@ const Device = require('../models/device');
 
 //http://purpleserver.net:80/player_api.php?username=Felipe&password=vvoYEf9UFn&type=m3u_plus&output=m3u8
 // heroku logs --tail --app turbox
-router.get('/',async (req,res,next)=>{  
+router.post('/',async (req,res,next)=>{  
 
     try{
-   
-        const url = "http://infinitytv.xyz/guide.xml";
+        //http://infinitytv.xyz/guide.xml
+        //http://psrv.io:80/xmltv.php?username=Felipe&password=vvoYEf9UFn
+        const url = "http://psrv.io:80/xmltv.php?username=Felipe&password=vvoYEf9UFn";
     
         iptv.get_epg(url).then((result) => {
             console.log("Resultado appcontrolle get_epg ->" );
