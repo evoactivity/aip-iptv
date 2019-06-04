@@ -221,18 +221,14 @@ function get_epg(url){
 
     var options = {
         url: url,
-        method: 'GET',
-        headers: {
-            'Content-Type' : 'application/octet-stream',
-            'User-Agent': 'FelipeTartarotti'
-        }
+        method: 'POST',
     }
 
     return new Promise((resolve, reject) => {
         request(options, function (error, response, body) {
             
         if (!error && response.statusCode == 200) {   
-            resolve(response);
+            resolve(body);
         }
         else
         console.log("Reject ->" + error );
