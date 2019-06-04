@@ -221,7 +221,12 @@ function get_epg(url){
 
     var options = {
         url: url,
-        method: 'POST',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/xml',
+            
+        }
+     
     }
 
     return new Promise((resolve, reject) => {
