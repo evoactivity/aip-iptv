@@ -231,9 +231,9 @@ function get_epg(url){
 
     return new Promise((resolve, reject) => {
         request(options, function (error, response, body) {
-            
+        var buffer = "";
         if (!error && response.statusCode == 200) {   
-            resolve(response);
+            resolve(buffer = buffer + body);
         }
         else
         console.log("Reject ->" + error );
