@@ -11,7 +11,7 @@ router.post('/',async (req,res,next)=>{
     try{
         //http://infinitytv.xyz/guide.xml
         //http://psrv.io:80/xmltv.php?username=Felipe&password=vvoYEf9UFn
-        const url = "http://psrv.io:80/xmltv.php?username=Felipe&password=vvoYEf9UFn";
+        const url = "http://infinitytv.xyz/guide.xml";
     
         iptv.get_epg(url).then((result) => {
             console.log("Resultado appcontrolle get_epg ->" );
