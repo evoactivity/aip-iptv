@@ -228,7 +228,7 @@ function get_epg(url){
         request(options, function (error, response, body) {
             
         if (!error && response.statusCode == 200) {   
-            resolve(body);
+            resolve(response);
         }
         else
         console.log("Reject ->" + error );
