@@ -11,7 +11,7 @@ router.post('/',async (req,res,next)=>{
 
     try{
         var body;
-        console.log(req);
+      
 
         //player_api.php?username=X&password=X
         //http://psrv.io:80/live/Felipe/vvoYEf9UFn/22886.m3u8

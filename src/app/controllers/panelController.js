@@ -9,7 +9,7 @@ router.post('/',async (req,res,next)=>{
         
         //http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn
       
-        const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
+        const url = "http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn";
 
         
         iptv.getPanelApi(url).then((result) => {
