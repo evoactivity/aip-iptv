@@ -4,15 +4,6 @@ const iptv = require('../service/iptv');
 const Device = require('../models/device');
 
 
-router.use(function (req, res, next) {
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    next();
-});
 router.post('/',async (req,res,next)=>{  
 
     try{
@@ -27,7 +18,7 @@ router.post('/',async (req,res,next)=>{
 
         
         iptv.getPanelApi(url).then((result) => {
-            console.log("Resultado getPanelApi appcontrolle ->" );
+            console.log("Resultado getPanelApi appcontrolle ->" + result );
             return res.send(result);  
         })
         .catch((error) => {
