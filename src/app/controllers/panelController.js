@@ -11,14 +11,26 @@ router.post('/',async (req,res,next)=>{
         console.log("PANEL CONTROLLER");
         var body = req.body;
         console.log(body);
+        var url;
+
+        await Device.findOne({"third_server_login": body.username}, function(err, results){
+            if(results){                        
+                console.log('Encontrou third_server_login');
+                url = results.url;
+            }
+            else
+            {
+                console.log('NÃO Encontrou third_server_login');
+            }
+        });    
         
         //http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn
       
-        const url = "http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn";
+        // url = "http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn";
 
-        
+
         iptv.getPanelApi(url).then((result) => {
-            console.log("Resultado getPanelApi appcontrolle ->" + result );
+            console.log("Resultado getPanelApi appcontrolle ->");
             return res.send(result);  
         })
         .catch((error) => {
