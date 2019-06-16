@@ -18,22 +18,32 @@ router.post('/',async (req,res,next)=>{
         //http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn&action=get_short_epg&stream_id=18301
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
+
         
-        const mac_address = await Device.findOne({"mac_address": body.username}, function(err, results){
+        await Device.findOne({"mac_address": body.username}, function(err, results){
             if(results){
                 console.log('Encontrou mac_address');  
+            }
+            else
+            {
+                await Device.findOne({"third_server_login": body.username}, function(err, results){
+                    if(results){                        
+                        console.log('Encontrou third_server_login');
+                    }
+                    else{
+                        body.action = "not_found";
+                    }
+                });
             }
         });
 
           
-        const third_server_login = await Device.findOne({"third_server_login": body.username}, function(err, results){
-            if(results){                        
-                console.log('Encontrou third_server_login');
-            }
-        });
     
                          
         switch(body.action) {
+            case "not_found":
+                    console.log("USUÁRIO NÃO ENCONTRADO")
+                break;
             case "get_series_info":
                 iptv.get_series_info(url,body.series_id.trim()).then((result) => {
                     console.log("Resultado appcontrolle get_series_info ->" );
