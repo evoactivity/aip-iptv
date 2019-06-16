@@ -33,6 +33,7 @@ router.post('/',async (req,res,next)=>{
                         url = results.url;
                     }
                     else{
+                        console.log("else third_server_login")
                         url = "null";
                         body.action = "not_found";
                         console.log(body.action);
