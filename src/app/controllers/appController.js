@@ -20,8 +20,7 @@ router.post('/',async (req,res,next)=>{
         var url;
 
 
-          get_mac = () => {
-            return new Promise((resolve, reject) => {
+          var get_mac = new Promise(function(resolve, reject) {
                 Device.findOne({"mac_address": body.username}, function(err, results){
                     if(results){
                         console.log('Encontrou mac_address');  
@@ -30,14 +29,12 @@ router.post('/',async (req,res,next)=>{
                     }
                     else
                     {
-                        reject(false);
+                        resolve(false);
                     }
                 });                    
-            });
-          }
-
-          get_third_server_login = () => {
-            return new Promise((resolve, reject) => {
+           });
+          
+            var get_third_server_login =  Promise(function(resolve, reject) {
                 Device.findOne({"third_server_login": body.username}, function(err, results){
                     if(results){       
                         console.log('Encontrou user');                   
@@ -46,26 +43,20 @@ router.post('/',async (req,res,next)=>{
                     }
                     else
                     {
-                        reject(false);
+                        resolve(false);
                     }
                 });
             });
-          }
+        
+        
+            Promise.all([get_mac, get_third_server_login]).then(function(values) {
+                console.log("RESOLVEDDDDDDDDDDDDDDDDDD");
+                console.log(values);
+            });
 
 
-        const runAsyncFunctions = async () => {
-            var get_mac = await get_mac();
-            var get_third_server_login = await get_third_server_login();
-
-            if(get_mac || get_third_server_login){
-
-                console.log("ACHOUUUUUU");
-
-            }
-
-      
-        }
-        runAsyncFunctions();
+       
+       
 
        
 
