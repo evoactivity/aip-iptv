@@ -14,6 +14,12 @@ function generateToken(params = {}){
     });
 }
 
+router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 router.post('/register',async (req,res)=>{
     const {email} = req.body;
 
@@ -31,8 +37,6 @@ router.post('/register',async (req,res)=>{
 });
 
 router.post('/authenticate',async (req,res)=>{
-
-    res.header("Access-Control-Allow-Origin", "*");
 
     const {email,password} = req.body;
     const user = await User.findOne({email}).select('+password');
