@@ -3,6 +3,12 @@ const router = express.Router();
 const iptv = require('../service/iptv');
 const Device = require('../models/device');
 
+router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 router.post('/',async (req,res,next)=>{  
 
     try{

@@ -6,6 +6,13 @@ const Device = require('../models/device');
 
 //http://purpleserver.net:80/player_api.php?username=Felipe&password=vvoYEf9UFn&type=m3u_plus&output=m3u8
 // heroku logs --tail --app turbox
+
+router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 router.post('/',async (req,res,next)=>{  
 
     try{
