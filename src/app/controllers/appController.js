@@ -50,38 +50,10 @@ router.post('/',async (req,res,next)=>{
         
         
             Promise.all([get_mac, get_third_server_login]).then(function(values) {
+
                 console.log("RESOLVEDDDDDDDDDDDDDDDDDD");
                 console.log(values);
             });
-
-
-       
-       
-
-       
-
-        
-        await Device.findOne({"mac_address": body.username}, function(err, results){
-            if(results){
-                console.log('Encontrou mac_address');  
-                url = results.url;
-            }
-            else
-            {
-                Device.findOne({"third_server_login": body.username}, function(err, results){
-                    if(results){                        
-                        console.log('Encontrou third_server_login');
-                        url = results.url;
-                    }
-                    else{
-                        console.log("else third_server_login")
-                        url = "null";
-                        body.action = "not_found";
-                        console.log(body.action);
-                    }
-                });
-            }
-        });
 
           
      
