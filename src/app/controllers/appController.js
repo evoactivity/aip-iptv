@@ -27,7 +27,7 @@ router.post('/',async (req,res,next)=>{
             }
             else
             {
-                Device.findOne({"third_server_login": body.username}, function(err, results){
+                await Device.findOne({"third_server_login": body.username}, function(err, results){
                     if(results){                        
                         console.log('Encontrou third_server_login');
                         url = results.url;
