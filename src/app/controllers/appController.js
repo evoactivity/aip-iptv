@@ -33,7 +33,9 @@ router.post('/',async (req,res,next)=>{
                         url = results.url;
                     }
                     else{
+                        url = "null";
                         body.action = "not_found";
+                        console.log(body.action);
                     }
                 });
             }
@@ -138,7 +140,7 @@ router.post('/',async (req,res,next)=>{
                 }); 
                 break;
             default:
-                console.log("entrou");
+                console.log("default");
                 iptv.getIptv(url).then((result) => {
                     console.log("Resultado appcontrolle ->" );
                     return res.send(result);  
@@ -149,21 +151,7 @@ router.post('/',async (req,res,next)=>{
                 });  
                 break;     
         }
-               /* }
-                else
-                {
-                    console.log("senha incorreta");
-                    next('Senha incorreta');
-                }
-                 
-            }   
-            else
-            {
-                console.log("Dispositivo não cadastrado");
-                next('Dispositivo não cadastrado');
-    
-            }
-        });*/
+              
         
     }catch(err){
         console.log("Try catch GERAL appcontrolle ->" + err );
