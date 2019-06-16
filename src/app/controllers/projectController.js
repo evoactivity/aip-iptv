@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middlewares/auth');
 const Device = require('../models/device');
-var cors = require('cors'); app.use(cors());
 
 router.use(authMiddleware);
 
