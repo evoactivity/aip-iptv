@@ -16,19 +16,21 @@ router.post('/',async (req,res,next)=>{
         //player_api.php?username=X&password=X
         //http://psrv.io:80/live/Felipe/vvoYEf9UFn/22886.m3u8
         //http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn&action=get_short_epg&stream_id=18301
-        const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
-
+        //var url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
+        var url;
 
         
         await Device.findOne({"mac_address": body.username}, function(err, results){
             if(results){
                 console.log('Encontrou mac_address');  
+                url = results.url;
             }
             else
             {
-                    Device.findOne({"third_server_login": body.username}, function(err, results){
+                Device.findOne({"third_server_login": body.username}, function(err, results){
                     if(results){                        
                         console.log('Encontrou third_server_login');
+                        url = results.url;
                     }
                     else{
                         body.action = "not_found";
