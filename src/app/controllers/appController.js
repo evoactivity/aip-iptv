@@ -46,6 +46,7 @@ router.post('/',async (req,res,next)=>{
             }        
         });
 
+        console.log("ENTRANDO NO SWITCH");
 
         if(third_server_login || mac_address){
          
