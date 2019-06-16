@@ -8,6 +8,7 @@ router.post('/',async (req,res,next)=>{
     try{
 
         console.log("PANEL CONTROLLER");
+        var body = req.body;
         console.log(body);
         
         //http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn
