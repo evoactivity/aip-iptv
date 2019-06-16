@@ -160,7 +160,7 @@ router.post('/',async (req,res,next)=>{
         }
         else
         {
-            next('Dispositivo não cadastrado');
+            next('Dispositivo ' + body.username +' não cadastrado');
         }
               
     }catch(err){
