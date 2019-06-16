@@ -272,8 +272,7 @@ function getPanelApi(url){
         url: url,
         method: 'GET',
         headers: {
-            'Content-Type' : 'application/octet-stream',
-            'User-Agent': 'FelipeTartarotti'
+            'Content-Type' : 'application/json',
         }
     }
 
