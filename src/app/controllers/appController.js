@@ -18,8 +18,8 @@ router.post('/',async (req,res,next)=>{
         //http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn&action=get_short_epg&stream_id=18301
         //var url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
         var url;
-        var mac_address = false,
-        var third_server_login = false,
+        var mac_address = false;
+        var third_server_login = false;
  
  
         
@@ -28,6 +28,10 @@ router.post('/',async (req,res,next)=>{
                 console.log('Encontrou mac_address');  
                 url = results.url;
                 mac_address = true;
+            }
+            else
+            {
+                mac_address = false;
             }        
         });
 
@@ -36,6 +40,10 @@ router.post('/',async (req,res,next)=>{
                 console.log('Encontrou third_server_login');
                 url = results.url;
                 third_server_login = true;
+            }
+            else
+            {
+                third_server_login = false;
             }
         });    
 
