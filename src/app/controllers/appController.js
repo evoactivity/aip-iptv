@@ -22,19 +22,6 @@ router.post('/',async (req,res,next)=>{
         var third_server_login = false;
  
  
-        
-        await Device.findOne({"mac_address": body.username}, function(err, results){
-            if(results){
-                console.log('Encontrou mac_address');  
-                url = results.url;
-                mac_address = true;
-            }
-            else
-            {
-                mac_address = false;
-            }        
-        });
-
         await Device.findOne({"third_server_login": body.username}, function(err, results){
             if(results){                        
                 console.log('Encontrou third_server_login');
@@ -46,6 +33,18 @@ router.post('/',async (req,res,next)=>{
                 third_server_login = false;
             }
         });    
+
+        await Device.findOne({"mac_address": body.username}, function(err, results){
+            if(results){
+                console.log('Encontrou mac_address');  
+                url = results.url;
+                mac_address = true;
+            }
+            else
+            {
+                mac_address = false;
+            }        
+        });
 
 
         if(third_server_login || mac_address){
