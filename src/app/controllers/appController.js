@@ -20,7 +20,7 @@ router.post('/',async (req,res,next)=>{
         var url;
 
 
-          const get_mac = () => {
+          get_mac = () => {
             return new Promise((resolve, reject) => {
                 Device.findOne({"mac_address": body.username}, function(err, results){
                     if(results){
@@ -36,7 +36,7 @@ router.post('/',async (req,res,next)=>{
             });
           }
 
-          const get_third_server_login = () => {
+          get_third_server_login = () => {
             return new Promise((resolve, reject) => {
                 Device.findOne({"third_server_login": body.username}, function(err, results){
                     if(results){       
