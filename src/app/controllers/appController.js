@@ -158,22 +158,11 @@ router.post('/',async (req,res,next)=>{
                     break;     
             }
         }
-               /* }
-                else
-                {
-                    console.log("senha incorreta");
-                    next('Senha incorreta');
-                }
-                 
-            }   
-            else
-            {
-                console.log("Dispositivo não cadastrado");
-                next('Dispositivo não cadastrado');
-    
-            }
-        });*/
-        
+        else
+        {
+            next('Dispositivo não cadastrado');
+        }
+              
     }catch(err){
         console.log("Try catch GERAL appcontrolle ->" + err );
         return res.status(400).send({error: err});
