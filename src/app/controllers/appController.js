@@ -7,9 +7,6 @@ const Device = require('../models/device');
 // heroku logs --tail --app turbox
 //"/player_api.php?username=swe&password=sww&action=get_short_epg&stream_id=18319"
 router.post('/',async (req,res,next)=>{  
-
-    res.header("Access-Control-Allow-Origin", "*");
-
     try{
         var body = req.body;
         console.log("APP CONTROLLER");
