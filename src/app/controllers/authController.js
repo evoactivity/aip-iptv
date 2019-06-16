@@ -32,6 +32,8 @@ router.post('/register',async (req,res)=>{
 
 router.post('/authenticate',async (req,res)=>{
 
+    res.header("Access-Control-Allow-Origin", "*");
+
     const {email,password} = req.body;
     const user = await User.findOne({email}).select('+password');
 
