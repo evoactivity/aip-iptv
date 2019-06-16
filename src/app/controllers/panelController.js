@@ -6,6 +6,9 @@ const Device = require('../models/device');
 router.post('/',async (req,res,next)=>{  
 
     try{
+
+        console.log("PANEL CONTROLLER");
+        console.log(body);
         
         //http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn
       
