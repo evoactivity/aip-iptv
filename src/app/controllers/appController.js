@@ -7,9 +7,8 @@ const Device = require('../models/device');
 // heroku logs --tail --app turbox
 //"/player_api.php?username=swe&password=sww&action=get_short_epg&stream_id=18319"
 
-var app = express();
 
-app.use(function (req, res, next) {
+router.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
     // Request methods you wish to allow
