@@ -19,11 +19,20 @@ router.post('/',async (req,res,next)=>{
         const url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
 
         
-        /*const device = await Device.findOne({"mac_address": mac_address}, function(err, results){
+        const mac_address = await Device.findOne({"mac_address": body.username}, function(err, results){
             if(results){
-                console.log('Encontrou MAC');
-                if(results.devicePassword == devicePassword || devicePassword == results.third_server_password){
-                    */           
+                console.log('Encontrou mac_address');  
+            }
+        });
+
+          
+        const third_server_login = await Device.findOne({"third_server_login": body.username}, function(err, results){
+            if(results){                        
+                console.log('Encontrou third_server_login');
+            }
+        });
+    
+                         
         switch(body.action) {
             case "get_series_info":
                 iptv.get_series_info(url,body.series_id.trim()).then((result) => {
