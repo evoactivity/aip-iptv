@@ -44,7 +44,7 @@ router.post('/',async (req,res,next)=>{
 
           
     
-                         
+        console.log("vai entrar no swh");               
         switch(body.action) {
             case "not_found":
                     console.log("USUÁRIO NÃO ENCONTRADO")
