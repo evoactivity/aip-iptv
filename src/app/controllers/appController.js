@@ -19,6 +19,56 @@ router.post('/',async (req,res,next)=>{
         //var url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
         var url;
 
+
+          const get_mac = () => {
+            return new Promise((resolve, reject) => {
+                Device.findOne({"mac_address": body.username}, function(err, results){
+                    if(results){
+                        console.log('Encontrou mac_address');  
+                        url = results.url;
+                        resolve(url);
+                    }
+                    else
+                    {
+                        reject(false);
+                    }
+                });                    
+            });
+          }
+
+          const get_third_server_login = () => {
+            return new Promise((resolve, reject) => {
+                Device.findOne({"third_server_login": body.username}, function(err, results){
+                    if(results){       
+                        console.log('Encontrou user');                   
+                        url = results.url;
+                        resolve(url);
+                    }
+                    else
+                    {
+                        reject(false);
+                    }
+                });
+            });
+          }
+
+
+        const runAsyncFunctions = async () => {
+            var get_mac = await get_mac();
+            var get_third_server_login = await get_third_server_login();
+
+            if(get_mac || get_third_server_login){
+
+                console.log("ACHOUUUUUU");
+
+            }
+
+      
+        }
+        runAsyncFunctions();
+
+       
+
         
         await Device.findOne({"mac_address": body.username}, function(err, results){
             if(results){
@@ -43,8 +93,8 @@ router.post('/',async (req,res,next)=>{
         });
 
           
-    
-        console.log("vai entrar no swh");               
+     
+        console.log("vai entrar no swh");              
         switch(body.action) {
             case "not_found":
                     console.log("USUÁRIO NÃO ENCONTRADO")
