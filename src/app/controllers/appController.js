@@ -18,46 +18,30 @@ router.post('/',async (req,res,next)=>{
         //http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn&action=get_short_epg&stream_id=18301
         //var url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
         var url;
-
-
-          var get_mac = new Promise(function(resolve, reject) {
-                Device.findOne({"mac_address": body.username}, function(err, results){
-                    if(results){
-                        console.log('Encontrou mac_address');  
-                        url = results.url;
-                        resolve(url);
-                    }
-                    else
-                    {
-                        resolve(false);
-                    }
-                });                    
-           });
-          
-            var get_third_server_login =  Promise(function(resolve, reject) {
+ 
+        
+        await Device.findOne({"mac_address": body.username}, function(err, results){
+            if(results){
+                console.log('Encontrou mac_address');  
+                url = results.url;
+            }
+            else
+            {
                 Device.findOne({"third_server_login": body.username}, function(err, results){
-                    if(results){       
-                        console.log('Encontrou user');                   
+                    if(results){                        
+                        console.log('Encontrou third_server_login');
                         url = results.url;
-                        resolve(url);
                     }
                     else
                     {
-                        resolve(false);
+                        return res.status(400).send({error: 'DISPOSITIVO NÃO ENCONTRADO'});
                     }
-                });
-            });
-        
-        
-            Promise.all([get_mac, get_third_server_login]).then(function(values) {
-
-                console.log("RESOLVEDDDDDDDDDDDDDDDDDD");
-                console.log(values);
-            });
+                });    
+            }
+        });
 
           
-     
-        console.log("vai entrar no swh");              
+                    
         switch(body.action) {
             case "not_found":
                     console.log("USUÁRIO NÃO ENCONTRADO")
@@ -154,7 +138,7 @@ router.post('/',async (req,res,next)=>{
                 }); 
                 break;
             default:
-                console.log("default");
+                console.log("entrou");
                 iptv.getIptv(url).then((result) => {
                     console.log("Resultado appcontrolle ->" );
                     return res.send(result);  
@@ -165,7 +149,21 @@ router.post('/',async (req,res,next)=>{
                 });  
                 break;     
         }
-              
+               /* }
+                else
+                {
+                    console.log("senha incorreta");
+                    next('Senha incorreta');
+                }
+                 
+            }   
+            else
+            {
+                console.log("Dispositivo não cadastrado");
+                next('Dispositivo não cadastrado');
+    
+            }
+        });*/
         
     }catch(err){
         console.log("Try catch GERAL appcontrolle ->" + err );
