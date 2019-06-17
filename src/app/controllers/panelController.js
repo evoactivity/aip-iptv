@@ -29,9 +29,10 @@ router.post('/',async (req,res,next)=>{
         
         //http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn
       
-        // url = "http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn";
+        url = "http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn";
 
         if(third_server_login){
+            console.log("entrou no if");
 
             iptv.getPanelApi(url).then((result) => {
                 console.log("Resultado getPanelApi appcontrolle ->");
