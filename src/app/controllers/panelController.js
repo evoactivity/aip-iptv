@@ -21,7 +21,7 @@ router.post('/',async (req,res,next)=>{
                 console.log('Encontrou third_server_login');
                 url = results.url;
                 user = results.third_server_login;
-                password = third_server_password;
+                password = results.third_server_password;
                 third_server_login = true;
             }
             else
