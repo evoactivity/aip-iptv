@@ -1,9 +1,9 @@
 const request = require('request');
 
-function getIptv(url){
-
+function getIptv(url,user,password){
+ //var url = "http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn";
     var options = {
-        url: url,
+        url: url+"player_api.php?username="+user+"&password="+password,
         method: 'POST',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -24,10 +24,10 @@ function getIptv(url){
     });
 }
 
-function get_vod_info(url,vod_id){
+function get_vod_info(url,user,password,vod_id){
 
     var options = {
-        url: url+"&action=get_vod_info&vod_id="+vod_id,
+        url: url+"player_api.php?username="+user+"&password="+password+"&action=get_vod_info&vod_id="+vod_id,
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -48,10 +48,10 @@ function get_vod_info(url,vod_id){
     });
 }
 
-function get_series_info(url,vod_id){
+function get_series_info(url,user,password,vod_id){
 
     var options = {
-        url: url+"&action=get_series_info&series_id="+vod_id,
+        url: url+"player_api.php?username="+user+"&password="+password+"&action=get_series_info&series_id="+vod_id,
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -72,10 +72,10 @@ function get_series_info(url,vod_id){
     });
 }
 
-function get_live_categories(url){
+function get_live_categories(url,user,password){
 
     var options = {
-        url: url+"&action=get_live_categories",
+        url: url+"player_api.php?username="+user+"&password="+password+"&action=get_live_categories",
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -96,10 +96,10 @@ function get_live_categories(url){
     });
 }
 
-function get_live_streams(url){
+function get_live_streams(url,user,password){
 
     var options = {
-        url: url+"&action=get_live_streams",
+        url: url+"player_api.php?username="+user+"&password="+password+"&action=get_live_streams",
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -121,10 +121,10 @@ function get_live_streams(url){
 }
 
 
-function get_vod_categories(url){
+function get_vod_categories(url,user,password){
 
     var options = {
-        url: url+"&action=get_vod_categories",
+        url: url+"player_api.php?username="+user+"&password="+password+"&action=get_vod_categories",
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -145,10 +145,10 @@ function get_vod_categories(url){
     });
 }
 
-function get_vod_streams(url){
+function get_vod_streams(url,user,password){
 
     var options = {
-        url: url+"&action=get_vod_streams",
+        url: url+"player_api.php?username="+user+"&password="+password+"&action=get_vod_streams",
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -169,10 +169,10 @@ function get_vod_streams(url){
     });
 }
 
-function get_series_categories(url){
+function get_series_categories(url,user,password){
 
     var options = {
-        url: url+"&action=get_series_categories",
+        url: url+"player_api.php?username="+user+"&password="+password+"&action=get_series_categories",
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -193,10 +193,10 @@ function get_series_categories(url){
     });
 }
 
-function get_series(url){
+function get_series(url,user,password){
 
     var options = {
-        url: url+"&action=get_series",
+        url: url+"player_api.php?username="+user+"&password="+password+"&action=get_series",
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -217,10 +217,10 @@ function get_series(url){
     });
 }
 
-function get_epg(url){
+function get_epg(url,user,password){
 
     var options = {
-        url: url,
+        url: url+"player_api.php?username="+user+"&password="+password,
         method: 'GET',
         headers: {
             'Content-Type': 'text/xml',
@@ -242,10 +242,10 @@ function get_epg(url){
     });
 }
 
-function get_short_epg(url,stream_id){
+function get_short_epg(url,user,password,stream_id){
 
     var options = {
-        url: url+"&action=get_short_epg&stream_id="+stream_id,
+        url: url+"player_api.php?username="+user+"&password="+password+"&action=get_short_epg&stream_id="+stream_id,
         method: 'GET',
         headers: {
             'Content-Type' : 'application/octet-stream',
@@ -266,10 +266,10 @@ function get_short_epg(url,stream_id){
     });
 }
 
-function getPanelApi(url){
-
+function getPanelApi(url,user,password){
+   // url = 'http://uhd.twistertv.online:8880/panel_api.php?username=turbox_leandro&password=249015123';
     var options = {
-        url: url,
+        url: url+"panel_api.php?username="+user+"&password="+password,
         method: 'GET',
         headers: {
             'Content-Type' : 'application/json',

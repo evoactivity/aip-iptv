@@ -13,11 +13,15 @@ router.post('/',async (req,res,next)=>{
         console.log(body);
         var url;
         var third_server_login = false;
+        var user;
+        var password;
 
         await Device.findOne({"third_server_login": body.username}, function(err, results){
             if(results){                        
                 console.log('Encontrou third_server_login');
                 url = results.url;
+                user = results.third_server_login;
+                password = third_server_password;
                 third_server_login = true;
             }
             else
@@ -32,12 +36,11 @@ router.post('/',async (req,res,next)=>{
         //http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn
       
        // url = "http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn";
-        url = 'http://uhd.twistertv.online:8880/panel_api.php?username=turbox_leandro&password=249015123';
 
         if(third_server_login){
             console.log("entrou no if");
 
-            iptv.getPanelApi(url).then((result) => {
+            iptv.getPanelApi(url,user,password).then((result) => {
                 console.log("Resultado getPanelApi appcontrolle ->");
                 return res.send(result);  
             })
