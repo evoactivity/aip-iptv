@@ -20,11 +20,9 @@ router.use(function (req, res, next) {
 
 router.post('/',async (req,res,next)=>{  
     try{
-        //var body = req.body;
-        var body = res.body;
-
-
-        console.log(body);
+        var body = req.body;
+        
+        console.log(req);
         //player_api.php?username=X&password=X
         //http://psrv.io:80/live/Felipe/vvoYEf9UFn/22886.m3u8
         //http://psrv.io:80/player_api.php?username=Felipe&password=vvoYEf9UFn&action=get_short_epg&stream_id=18301
