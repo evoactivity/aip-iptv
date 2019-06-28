@@ -32,7 +32,7 @@ router.post('/',async (req,res,next)=>{
         //http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn
       
        // url = "http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn";
-        url = 'http://uhd.twistertv.online:8880/player_api.php?username=turbox_leandro&password=249015123';
+        url = 'http://uhd.twistertv.online:8880/panel_api.php?username=turbox_leandro&password=249015123';
 
         if(third_server_login){
             console.log("entrou no if");
