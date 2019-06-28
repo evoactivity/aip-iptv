@@ -26,7 +26,9 @@ router.post('/',async (req,res,next)=>{
                 third_server_login = false;
             }
         });    
-        
+
+        console.log(url);
+                
         //http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn
       
        // url = "http://psrv.io:80/panel_api.php?username=Felipe&password=vvoYEf9UFn";
