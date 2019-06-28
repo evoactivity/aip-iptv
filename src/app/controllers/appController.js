@@ -160,7 +160,7 @@ router.post('/',async (req,res,next)=>{
                 default:
                     console.log("entrou");
                     iptv.getIptv(url).then((result) => {
-                        console.log("Resultado appcontrolle ->" );
+                        console.log("Resultado appcontrolle ->" + result);
                         return res.send(result);  
                     })
                     .catch((error) => {
