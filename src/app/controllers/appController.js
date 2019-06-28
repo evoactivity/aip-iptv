@@ -53,6 +53,8 @@ router.post('/',async (req,res,next)=>{
             if(results){
                 console.log('Encontrou mac_address');  
                 url = results.url;
+                user = results.third_server_login;
+                password = third_server_password;
                 mac_address = true;
             }
             else
